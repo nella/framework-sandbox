@@ -1,5 +1,4 @@
 <?php
-
 /**
  * My Application
  *
@@ -12,6 +11,7 @@ namespace App;
 use Nette\Debug,
 	Nette\Application\BadRequestException;
 
+namespace App;
 
 /**
  * Error presenter.

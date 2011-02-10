@@ -1,5 +1,4 @@
 <?php
-
 /**
  * My Application
  *

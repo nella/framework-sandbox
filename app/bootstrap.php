@@ -17,7 +17,7 @@ Environment::loadConfig();
 
 $application = Environment::getApplication();
 //$application->errorPresenter = 'Error';
-$application->catchExceptions = (bool) !Nette\Debug::$productionMode;
+$application->catchExceptions = (bool) Nette\Debug::$productionMode;
 
 require_once __DIR__ . "/routes.php";
 
