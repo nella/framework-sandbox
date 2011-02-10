@@ -5,24 +5,20 @@
 # http://nette.org/security-warning
 #
 common:
-    # PHP configuration
-    php:
-        date.timezone = "Europe/Prague"
-        session.save_path = "%tempDir%/sessions"
-        #zlib.output_compression = yes
-        #default_charset = "UTF-8"
+	php: # PHP configuration
+		date.timezone: Europe/Prague
+		php.session.save_path = "%tempDir%/sessions"
+		# php.zlib.output_compression = yes
+		# php.default_charset = "UTF-8"
 
-    # services
-    service:
-        Nette\Loaders\RobotLoader:
-            option:
-                directory = [%appDir%, %libsDir%]
-            run = TRUE
+	service:
+		Nette\Security\IAuthenticator: UsersModel
+		Nette\Loaders\RobotLoader:
+			option:
+				directory: [%appDir%, %libsDir%]
+			run: true
 
 production < common:
-    php:
-        default_charset = "UTF-8" # need this because empty section not supported yet
 
 development < common:
-    php:
-        default_charset = "UTF-8" # need this because empty section not supported yet
+
