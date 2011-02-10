@@ -7,9 +7,10 @@
  * @package    MyApplication
  */
 
+namespace App;
+
 use Nette\Debug,
 	Nette\Application\BadRequestException;
-
 
 
 /**

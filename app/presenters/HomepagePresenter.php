@@ -7,7 +7,7 @@
  * @package    MyApplication
  */
 
-
+namespace App;
 
 /**
  * Homepage presenter.
