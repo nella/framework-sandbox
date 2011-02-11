@@ -12,11 +12,39 @@ common:
 		# php.default_charset = "UTF-8"
 
 	service:
-		Nette\Security\IAuthenticator: UsersModel
 		Nette\Loaders\RobotLoader:
 			option:
 				directory: [%appDir%, %libsDir%]
 			run: true
+		
+		Nette\Caching\Cache:
+			class: Nette\Caching\Cache
+			argument: ['@Nette\Caching\ICacheStorage']
+
+		Doctrine\Common\Cache\Cache:
+			class: Nella\Doctrine\Cache
+			argument: ['@Nette\Caching\Cache']
+
+		Doctrine\ODM\MongoDB\Mapping\Driver\Driver:
+			factory: Nella\Doctrine\ServiceFactory::annotationDriver
+
+		Doctrine\MongoDB\Connection:
+			factory: Nella\Doctrine\ServiceFactory::connection
+			argument: [{host: localhost, username: sandbox, password: sandbox, dbname: sandbox}]
+
+		Doctrine\ODM\MongoDB\Configuration:
+			factory: Nella\Doctrine\ServiceFactory::configuration
+			argument: 
+				- '@Doctrine\ODM\MongoDB\Mapping\Driver\Driver'
+				- '@Doctrine\Common\Cache\Cache'
+				- {database: {dbname: sandbox}}
+		
+		Doctrine\ODM\MongoDB\DocumentManager:
+			factory: Nella\Doctrine\ServiceFactory::documentManager
+			argument: 
+				- '@Doctrine\MongoDB\Connection'
+				- '@Doctrine\ODM\MongoDB\Configuration'
+
 
 production < common:
 
