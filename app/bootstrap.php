@@ -15,6 +15,10 @@ require_once LIBS_DIR . "/Nella/loader.php";
 require_once __DIR__ . "/environment.php";
 Environment::loadConfig();
 
+// Load panels
+Nella\Panels\Callback::register();
+Nella\Panels\Version::register();
+
 $application = Environment::getApplication();
 //$application->errorPresenter = 'Error';
 $application->catchExceptions = (bool) Nette\Debug::$productionMode;
