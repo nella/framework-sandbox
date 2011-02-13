@@ -25,25 +25,24 @@ common:
 			class: Nella\Doctrine\Cache
 			argument: ['@Nette\Caching\Cache']
 
-		Doctrine\ODM\MongoDB\Mapping\Driver\Driver:
-			factory: Nella\Doctrine\ServiceFactory::annotationDriver
-
-		Doctrine\MongoDB\Connection:
-			factory: Nella\Doctrine\ServiceFactory::connection
-			argument: [{host: localhost, username: sandbox, password: sandbox, dbname: sandbox}]
-
-		Doctrine\ODM\MongoDB\Configuration:
+		Doctrine\Common\EventManager:
+			class: Doctrine\Common\EventManager
+			
+		Doctrine\DBAL\Event\Listeners\MysqlSessionInit:
+			class: Doctrine\DBAL\Event\Listeners\MysqlSessionInit
+			argument: ['utf8']
+			
+		Doctrine\ORM\Configuration:
 			factory: Nella\Doctrine\ServiceFactory::configuration
-			argument: 
-				- '@Doctrine\ODM\MongoDB\Mapping\Driver\Driver'
-				- '@Doctrine\Common\Cache\Cache'
-				- {database: {dbname: sandbox}}
-		
-		Doctrine\ODM\MongoDB\DocumentManager:
-			factory: Nella\Doctrine\ServiceFactory::documentManager
-			argument: 
-				- '@Doctrine\MongoDB\Connection'
-				- '@Doctrine\ODM\MongoDB\Configuration'
+			argument: ['@Doctrine\Common\Cache\Cache']
+
+		Doctrine\ORM\EntityManager:
+			factory: Nella\Doctrine\ServiceFactory::entityManager
+			argument:
+				- {driver: pdo_mysql, host: localhost, username: sandbox, password: sandbox, dbname: sandbox}
+				- '@Doctrine\ORM\Configuration'
+				- '@Doctrine\Common\EventManager'
+				- '@Doctrine\DBAL\Event\Listeners\MysqlSessionInit'
 
 
 production < common:
