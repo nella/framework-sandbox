@@ -39,7 +39,7 @@ common:
 		Doctrine\ORM\EntityManager:
 			factory: Nella\Doctrine\ServiceFactory::entityManager
 			argument:
-				- {driver: pdo_mysql, host: localhost, username: sandbox, password: sandbox, dbname: sandbox}
+				- {driver: pdo_mysql, host: localhost, user: sandbox, password: sandbox, dbname: sandbox}
 				- '@Doctrine\ORM\Configuration'
 				- '@Doctrine\Common\EventManager'
 				- '@Doctrine\DBAL\Event\Listeners\MysqlSessionInit'
