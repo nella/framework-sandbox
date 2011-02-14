@@ -10,5 +10,6 @@ use Nette\Application\Route;
 
 $router = Nette\Environment::getApplication()->getRouter();
 
+$router[] = new \Nette\Application\CliRouter(array('action' => "Utils:help"));
 $router[] = new Route("index.php", "Homepage:default", Route::ONE_WAY);
 $router[] = new Route("<presenter>/<action>[/<id>]", "Homepage:default");
