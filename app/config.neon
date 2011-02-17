@@ -50,6 +50,10 @@ common:
 				- '@Doctrine\ORM\Configuration'
 				- '@Doctrine\Common\EventManager'
 				- '@Doctrine\DBAL\Event\Listeners\MysqlSessionInit'
+		
+		Nette\Security\IAuthenticator:
+			class: Nella\Security\Authenticator
+			argument: ['@Doctrine\ORM\EntityManager']
 
 
 production < common:
