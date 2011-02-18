@@ -1,7 +1,7 @@
 <?php
 
 // the identification of this site
-define('SITE', '');
+define('SITE', 'Nella Application Skeleton');
 
 // absolute filesystem path to the web root
 define('WWW_DIR', __DIR__);
