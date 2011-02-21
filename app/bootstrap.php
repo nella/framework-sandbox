@@ -8,20 +8,29 @@
  */
 
 
-use Nette\Environment;
+use Nette\Debug, 
+	Nette\Environment;
 
 require_once LIBS_DIR . "/Nella/loader.php";
 
-require_once __DIR__ . "/environment.php";
+Debug::enable();
+
+// Set my environment name
+//Environment::setName("vrtak");
+
 Environment::loadConfig();
 
 // Load panels
 Nella\Panels\Callback::register();
 Nella\Panels\Version::register();
 
+// Setup application
 $application = Environment::getApplication();
 //$application->errorPresenter = 'Error';
 $application->catchExceptions = (bool) Nette\Debug::$productionMode;
+if (Environment::isConsole()) {
+  	$application->allowedMethods = FALSE;
+}
 
 require_once __DIR__ . "/routes.php";
 

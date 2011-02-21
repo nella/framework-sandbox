@@ -40,7 +40,7 @@ common:
 			factory: Nella\Doctrine\ServiceFactory::configuration
 			argument: 
 				- '@Doctrine\Common\Cache\Cache'
-				- NULL
+				- []
 				- '@Doctrine\DBAL\Logging\SQLLogger'
 
 		Doctrine\ORM\EntityManager:
