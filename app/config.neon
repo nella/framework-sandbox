@@ -17,20 +17,8 @@ common:
 				directory: [%appDir%, %libsDir%]
 			run: true
 		
-		Nette\Caching\Cache:
-			class: Nette\Caching\Cache
-			argument: ['@Nette\Caching\ICacheStorage']
-
-		Doctrine\Common\Cache\Cache:
-			class: Nella\Doctrine\Cache
-			argument: ['@Nette\Caching\Cache']
-			
-		Doctrine\DBAL\Logging\SQLLogger:
-			factory: Nella\Doctrine\Panel::create
-			run: true
-
 		Doctrine\Common\EventManager:
-			class: Doctrine\Common\EventManager
+			callMethod: {addEventSubscriber: ['@Doctrine\DBAL\Event\Listeners\MysqlSessionInit']}
 			
 		Doctrine\DBAL\Event\Listeners\MysqlSessionInit:
 			class: Doctrine\DBAL\Event\Listeners\MysqlSessionInit
@@ -38,10 +26,7 @@ common:
 			
 		Doctrine\ORM\Configuration:
 			factory: Nella\Doctrine\ServiceFactory::configuration
-			argument: 
-				- '@Doctrine\Common\Cache\Cache'
-				- []
-				- '@Doctrine\DBAL\Logging\SQLLogger'
+			callMethod: {setMetadataCacheImpl: ['@Doctrine\Common\Cache\Cache'], setQueryCacheImpl: ['@Doctrine\Common\Cache\Cache'], setSQLLogger: ['@Doctrine\DBAL\Logging\SQLLogger']}
 
 		Doctrine\ORM\EntityManager:
 			factory: Nella\Doctrine\ServiceFactory::entityManager
@@ -49,11 +34,6 @@ common:
 				- {driver: pdo_mysql, host: localhost, user: sandbox, password: sandbox, dbname: sandbox}
 				- '@Doctrine\ORM\Configuration'
 				- '@Doctrine\Common\EventManager'
-				- '@Doctrine\DBAL\Event\Listeners\MysqlSessionInit'
-		
-		Nette\Security\IAuthenticator:
-			class: Nella\Security\Authenticator
-			argument: ['@Doctrine\ORM\EntityManager']
 
 
 production < common:
