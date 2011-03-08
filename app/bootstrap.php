@@ -28,19 +28,7 @@ Nella\Panels\Version::register();
 $application = Environment::getApplication();
 //$application->errorPresenter = 'Error';
 $application->catchExceptions = (bool) Nette\Debug::$productionMode;
-if (Environment::isConsole()) {
-  	$application->allowedMethods = FALSE;
-}
 
 require_once __DIR__ . "/routes.php";
 
-if (Environment::isConsole()) {
-	$helperSet = new \Symfony\Component\Console\Helper\HelperSet();
-	$context = $application->context;
-	$helperSet->set(new \Nella\Doctrine\EntityManagerHelper(function() use ($context) {
-		return $context->getService('Doctrine\ORM\EntityManager');
-	}));
-	\Doctrine\ORM\Tools\Console\ConsoleRunner::run($helperSet);
-} else {
-	$application->run();
-}
+$application->run();
