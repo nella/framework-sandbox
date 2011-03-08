@@ -34,4 +34,13 @@ if (Environment::isConsole()) {
 
 require_once __DIR__ . "/routes.php";
 
-$application->run();
+if (Environment::isConsole()) {
+	$helperSet = new \Symfony\Component\Console\Helper\HelperSet();
+	$context = $application->context;
+	$helperSet->set(new \Nella\Doctrine\EntityManagerHelper(function() use ($context) {
+		return $context->getService('Doctrine\ORM\EntityManager');
+	}));
+	\Doctrine\ORM\Tools\Console\ConsoleRunner::run($helperSet);
+} else {
+	$application->run();
+}
