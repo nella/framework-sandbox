@@ -40,3 +40,5 @@ production < common:
 
 development < common:
 
+console < common:
+
