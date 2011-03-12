@@ -29,7 +29,7 @@ common:
 
 production < common:
 	database:
-		{driver: pdo_mysql, host: localhost, user: ace, password: ace, dbname: cms}
+		{driver: pdo_mysql, host: localhost, user: sandbox, password: sandbox, dbname: sandbox}
 
 development < common:
 
