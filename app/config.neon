@@ -11,32 +11,25 @@ common:
 		# php.zlib.output_compression = yes
 		# php.default_charset = "UTF-8"
 
-	service:
-		Nette\Loaders\RobotLoader:
-			option:
-				directory: [%appDir%, %libsDir%]
-			run: true
-		
-		Doctrine\Common\EventManager:
-			callMethod: {addEventSubscriber: ['@Doctrine\DBAL\Event\Listeners\MysqlSessionInit']}
-			
-		Doctrine\DBAL\Event\Listeners\MysqlSessionInit:
-			class: Doctrine\DBAL\Event\Listeners\MysqlSessionInit
-			argument: ['utf8']
-			
+	services:
 		Doctrine\ORM\Configuration:
 			factory: Nella\Doctrine\ServiceFactory::configuration
-			callMethod: {setMetadataCacheImpl: ['@Doctrine\Common\Cache\Cache'], setQueryCacheImpl: ['@Doctrine\Common\Cache\Cache'], setSQLLogger: ['@Doctrine\DBAL\Logging\SQLLogger']}
+			methods: 
+				- {method: setMetadataCacheImpl, arguments: ['@Doctrine\Common\Cache\Cache']}
+				- {method: setQueryCacheImpl, arguments: ['@Doctrine\Common\Cache\Cache']}
+				- {method: setSQLLogger, arguments: ['@Doctrine\DBAL\Logging\SQLLogger']}
 
 		Doctrine\ORM\EntityManager:
 			factory: Nella\Doctrine\ServiceFactory::entityManager
 			argument:
-				- {driver: pdo_mysql, host: localhost, user: sandbox, password: sandbox, dbname: sandbox}
+				- %database%
 				- '@Doctrine\ORM\Configuration'
 				- '@Doctrine\Common\EventManager'
 
 
 production < common:
+	database:
+		{driver: pdo_mysql, host: localhost, user: ace, password: ace, dbname: cms}
 
 development < common:
 
