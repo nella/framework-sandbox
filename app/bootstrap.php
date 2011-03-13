@@ -20,10 +20,6 @@ Debug::enable();
 
 Environment::loadConfig();
 
-// Load panels
-Nella\Panels\Callback::register();
-Nella\Panels\Version::register();
-
 // Setup application
 $application = Environment::getApplication();
 //$application->errorPresenter = 'Error';
