@@ -21,7 +21,7 @@ common:
 
 		Doctrine\ORM\EntityManager:
 			factory: Nella\Doctrine\ServiceFactory::entityManager
-			argument:
+			arguments:
 				- %database%
 				- '@Doctrine\ORM\Configuration'
 				- '@Doctrine\Common\EventManager'
