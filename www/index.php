@@ -15,5 +15,8 @@ define('LIBS_DIR', WWW_DIR . '/../libs');
 // absolute filesystem path to the temporary files
 define('TEMP_DIR', WWW_DIR . '/../temp');
 
+// absolute filesystem path to the uploaded files
+define('STORAGE_DIR', APP_DIR . '/storage');
+
 // load bootstrap file
 require APP_DIR . '/bootstrap.php';
