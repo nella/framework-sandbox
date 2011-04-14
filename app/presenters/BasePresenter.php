@@ -14,7 +14,7 @@ namespace App;
  * @author     John Doe
  * @package    MyApplication
  */
-abstract class BasePresenter extends \Nella\Application\Presenter
+abstract class BasePresenter extends \Nella\Application\UI\Presenter
 {
 
 }

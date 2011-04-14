@@ -8,12 +8,12 @@
  */
 
 
-use Nette\Debug, 
+use Nette\Diagnostics\Debugger, 
 	Nette\Environment;
 
 require_once LIBS_DIR . "/Nella/loader.php";
 
-Debug::enable();
+Debugger::enable();
 
 // Set my environment name
 //Environment::setName("vrtak");
@@ -23,7 +23,7 @@ Environment::loadConfig();
 // Setup application
 $application = Environment::getApplication();
 //$application->errorPresenter = 'Error';
-$application->catchExceptions = (bool) Nette\Debug::$productionMode;
+$application->catchExceptions = (bool) Debugger::$productionMode;
 
 require_once __DIR__ . "/routes.php";
 

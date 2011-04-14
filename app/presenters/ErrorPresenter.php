@@ -8,7 +8,7 @@
 
 namespace App;
 
-use Nette\Debug,
+use Nette\Diagnostics\Debugger,
 	Nette\Application\BadRequestException;
 
 namespace App;
@@ -38,7 +38,7 @@ class ErrorPresenter extends BasePresenter
 
 		} else {
 			$this->setView('500'); // load template 500.latte
-			Debug::log($exception, Debug::ERROR); // and log exception
+			Debugger::log($exception, Debugger::ERROR); // and log exception
 		}
 	}
 

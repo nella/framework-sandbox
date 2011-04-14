@@ -6,7 +6,7 @@
  * @package    MyApplication
  */
 
-use Nette\Application\Route;
+use Nette\Application\Routers\Route;
 
 $router = Nette\Environment::getApplication()->getRouter();
 
