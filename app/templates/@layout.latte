@@ -1,7 +1,7 @@
 {**
  * My Application layout template.
  *
- * @copyright  Copyright (c) 2010 John Doe
+ * @copyright  Copyright (c) 2011 John Doe
  * @package    MyApplication
  *
  * @param string   $basePath web base path
@@ -14,17 +14,24 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-	<meta name="description" content="Nette Framework web application skeleton">
+	<meta name="description" content="Nellae Framework web application skeleton">
 	<meta name="robots" content="{$robots}" n:ifset="$robots">
 
 	<title>{=SITE}</title>
 
-	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css" type="text/css">
-	<link rel="stylesheet" media="print" href="{$basePath}/css/print.css" type="text/css">
+	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
+	<link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="{$basePath}/css/jquery-ui-1.8.12.custom.css">
 
-	<script type="text/javascript" src="{$basePath}/js/jquery-1.5.min.js"></script>
-	<script type="text/javascript" src="{$basePath}/js/jquery-nella.js"></script>
+	<script src="{$basePath}/js/head.min.js"></script>
+	<script>
+		head.js(
+			{$basePath}+'/js/jquery-1.6.min.js', 
+			{$basePath}+'/js/jquery-ui-1.8.12.custom.min.js',
+			{$basePath}+'/js/netteForms.js'
+		);
+	</script>
 </head>
 
 <body>
