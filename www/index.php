@@ -18,5 +18,8 @@ define('TEMP_DIR', WWW_DIR . '/../temp');
 // absolute filesystem path to the uploaded files
 define('STORAGE_DIR', APP_DIR . '/storage');
 
+// absolute filesystem path to the public image cache files
+define('IMAGE_CACHE_DIR', WWW_DIR . '/images');
+
 // load bootstrap file
 require APP_DIR . '/bootstrap.php';

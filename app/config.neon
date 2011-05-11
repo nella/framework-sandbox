@@ -7,31 +7,18 @@
 common:
 	php: # PHP configuration
 		date.timezone: Europe/Prague
-		php.session.save_path = "%tempDir%/sessions"
 		# php.zlib.output_compression = yes
 		# php.default_charset = "UTF-8"
 
-	services:
-		Doctrine\ORM\Configuration:
-			factory: Nella\Doctrine\ServiceFactory::configuration
-			methods: 
-				- {method: setMetadataCacheImpl, arguments: ['@Doctrine\Common\Cache\Cache']}
-				- {method: setQueryCacheImpl, arguments: ['@Doctrine\Common\Cache\Cache']}
-				- {method: setSQLLogger, arguments: ['@Doctrine\DBAL\Logging\SQLLogger']}
-
-		Doctrine\ORM\EntityManager:
-			factory: Nella\Doctrine\ServiceFactory::entityManager
-			arguments:
-				- %database%
-				- '@Doctrine\ORM\Configuration'
-				- '@Doctrine\Common\EventManager'
-
-
 production < common:
-	database:
-		{driver: pdo_mysql, host: localhost, user: sandbox, password: sandbox, dbname: sandbox}
 
 development < common:
+	database:
+		driver: pdo_mysql
+		host: localhost
+		user: sandbox
+		password: sandbox
+		dbname: sandbox
 
 console < common:
 
