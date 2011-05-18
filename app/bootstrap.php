@@ -8,17 +8,14 @@
  */
 
 
-use Nette\Diagnostics\Debugger, 
+use Nette\Diagnostics\Debugger,
 	Nette\Environment;
 
 require_once LIBS_DIR . "/Nella/loader.php";
 
 Debugger::enable();
 
-// Set my environment name
-//Environment::setName("vrtak");
-
-Environment::loadConfig();
+Environment::loadConfig(__DIR__ . "/config.neon"/* , 'vrtak'*/);
 
 // Setup application
 $application = Environment::getApplication();
