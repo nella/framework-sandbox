@@ -14,12 +14,11 @@ $context = Nette\Environment::getContext();
 // Homepage
 $router[] = new Route("index.php", "Homepage:default", Route::ONE_WAY);
 
-
 // Media
 $route = $router[] = new \Nella\Media\FileRoute('<file>', "Media:Media:file");
-$route->setContainer($context);
+$route->setContainer($context->doctrineContainer);
 $route = $router[] = new \Nella\Media\ImageRoute('images/<format>/<image>.<type>', "Media:Media:image");
-$route->setContainer($context);
+$route->setContainer($context->doctrineContainer);
 
 // Default
 $router[] = new Route("<presenter>/<action>[/<id>]", "Homepage:default");
