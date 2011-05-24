@@ -9,19 +9,36 @@
 
 
 use Nette\Diagnostics\Debugger,
-	Nette\Environment;
+	Nette\Application\Routers\Route;
 
 require_once LIBS_DIR . "/Nella/loader.php";
 
-Debugger::enable();
+Debugger::enable(Debugger::DEVELOPMENT);
 
-Environment::loadConfig(__DIR__ . "/config.neon"/* , 'vrtak'*/);
+$configurator = new Nella\Configurator;
+$configurator->loadConfig(__DIR__ . "/config.neon", 'development');
+$context = $configurator->getContainer();
 
 // Setup application
-$application = Environment::getApplication();
+$application = $context->application;
 //$application->errorPresenter = 'Error';
-$application->catchExceptions = (bool) Debugger::$productionMode;
+$application->catchExceptions = Debugger::$productionMode;
 
-require_once __DIR__ . "/routes.php";
+$application->onStartup[] = function() use($application, $context) {
+	$router = $application->getRouter();
+
+	// Homepage
+	$router[] = new Route("index.php", "Homepage:default", Route::ONE_WAY);
+
+	// Media
+	$route = $router[] = new Nella\Media\FileRoute('<file>', "Media:Media:file");
+	$route->setContainer($context->doctrineContainer);
+	$route = $router[] = new Nella\Media\ImageRoute('images/<format>/<image>.<type>', "Media:Media:image");
+	$route->setContainer($context->doctrineContainer);
+
+	// Default
+	$router[] = new Route("<presenter>/<action>[/<id>]", "Homepage:default");
+
+};
 
 $application->run();
