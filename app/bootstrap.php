@@ -11,34 +11,35 @@
 use Nette\Diagnostics\Debugger,
 	Nette\Application\Routers\Route;
 
-require_once LIBS_DIR . "/Nella/loader.php";
+require_once $params['libsDir'] . "/Nella/loader.php";
 
-Debugger::enable(Debugger::DEVELOPMENT);
+// Setup debugger
+Debugger::$logDirectory = $params['rootDir'] . '/log';
+Debugger::enable();
 
-$configurator = new Nella\Configurator;
-$configurator->loadConfig(__DIR__ . "/config.neon", 'development');
-$context = $configurator->getContainer();
+// Load configurations
+$configurator = new Nella\Configurator('Nette\DI\Container', $params);
+$context = $configurator->loadConfig($params['appDir'] . "/config.neon");
+
 
 // Setup application
 $application = $context->application;
 //$application->errorPresenter = 'Error';
 $application->catchExceptions = Debugger::$productionMode;
 
-$application->onStartup[] = function() use($application, $context) {
-	$router = $application->getRouter();
+// Router
+$router = $application->router;
+// Homepage
+$router[] = new Route("index.php", "Homepage:default", Route::ONE_WAY);
+// Media
+$route = $router[] = new Nella\Media\FileRoute(
+	'files/<file>', "Media:Media:file", 0, $context->doctrineContainer
+);
+$route = $router[] = new Nella\Media\ImageRoute(
+	'images/<format>/<image>.<type>', "Media:Media:image", 0, $context->doctrineContainer
+);
+// Default
+$router[] = new Route("<presenter>/<action>[/<id>]", "Homepage:default");
 
-	// Homepage
-	$router[] = new Route("index.php", "Homepage:default", Route::ONE_WAY);
-
-	// Media
-	$route = $router[] = new Nella\Media\FileRoute('<file>', "Media:Media:file");
-	$route->setContainer($context->doctrineContainer);
-	$route = $router[] = new Nella\Media\ImageRoute('images/<format>/<image>.<type>', "Media:Media:image");
-	$route->setContainer($context->doctrineContainer);
-
-	// Default
-	$router[] = new Route("<presenter>/<action>[/<id>]", "Homepage:default");
-
-};
 
 $application->run();

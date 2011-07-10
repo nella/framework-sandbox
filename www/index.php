@@ -1,25 +1,27 @@
 <?php
 
-// the identification of this site
-define('SITE', 'Nella Application Skeleton');
+$params = array();
+
+// the identification of this application
+$params['appName'] = "Nella Application Skeleton";
+
+// absolute filesystem path to the root dir
+$params['rootDir'] = __DIR__ . "/..";
 
 // absolute filesystem path to the web root
-define('WWW_DIR', __DIR__);
+$params['wwwDir'] = __DIR__;
 
 // absolute filesystem path to the application root
-define('APP_DIR', WWW_DIR . '/../app');
+$params['appDir'] = $params['rootDir'] . "/app";
 
 // absolute filesystem path to the libraries
-define('LIBS_DIR', WWW_DIR . '/../libs');
+$params['libsDir'] = $params['rootDir'] . "/libs";
 
 // absolute filesystem path to the temporary files
-define('TEMP_DIR', WWW_DIR . '/../temp');
+$params['tempDir'] = $params['rootDir'] . "/temp";
 
 // absolute filesystem path to the uploaded files
-define('STORAGE_DIR', APP_DIR . '/storage');
-
-// absolute filesystem path to the public image cache files
-define('IMAGE_CACHE_DIR', WWW_DIR . '/images');
+$params['storageDir'] = $params['appDir'] . "/storage";
 
 // load bootstrap file
-require APP_DIR . '/bootstrap.php';
+require $params['appDir'] . '/bootstrap.php';
