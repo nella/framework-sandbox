@@ -18,8 +18,8 @@ Debugger::$logDirectory = $params['rootDir'] . '/log';
 Debugger::enable();
 
 // Load configurations
-$configurator = new Nella\Configurator('Nette\DI\Container', $params);
-$context = $configurator->loadConfig($params['appDir'] . "/config.neon");
+$configurator = new Nella\Configurator($params);
+$context = $configurator->loadConfig();
 
 
 // Setup application
