@@ -13,12 +13,14 @@ common:
 production < common:
 
 development < common:
+	services:
+		cacheStorage:
+			class: Nette\Caching\Storages\MemoryStorage
+		#templateCacheStorage:
+		#	class: Nette\Caching\Storages\MemoryStorage
 	database:
-		driver: pdo_mysql
-		host: localhost
-		user: sandbox
-		password: sandbox
-		dbname: sandbox
+		driver: pdo_sqlite
+		path: %storageDir%/db.sqlite
 
 console < common:
 
