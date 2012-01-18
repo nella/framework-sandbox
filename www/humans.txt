@@ -1,0 +1,20 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+
+/* TEAM */
+  <position>:
+  Site:
+  Twitter:
+  Location:
+
+/* THANKS */
+  Names (& URL): Nella Framework http://nellafw.org
+  Names (& URL): HTML 5 Boiler Plate
+  Names (& URL): Nette Framework http://nette.org
+  Names (& URL): Doctrine http://doctrine-project.org
+
+/* SITE */
+  Standards: HTML5, CSS3
+  Components: Modernizr, jQuery, Nella Framework, Nette Framework, Doctrine
+  Software:

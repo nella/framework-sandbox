@@ -1,0 +1,10 @@
+services:
+	cacheStorage:
+		class: Nette\Caching\Storages\MemoryStorage
+	templateCacheStorage:
+		class: Nette\Caching\Storages\MemoryStorage
+
+doctrine:
+	database:
+		driver: pdo_sqlite
+		path: %storageDir%/db.sqlite

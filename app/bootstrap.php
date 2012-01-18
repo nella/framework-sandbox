@@ -1,45 +1,41 @@
 <?php
+
 /**
- * This file is part of the Nella Framework.
- *
- * Copyright (c) 2006, 2011 Patrik Votoček (http://patrik.votocek.cz)
- *
- * This source file is subject to the GNU Lesser General Public License. For more information please see http://nella-project.org
+ * My Application bootstrap file.
  */
+use Nette\Application\Routers\Route;
 
 
-use Nette\Diagnostics\Debugger,
-	Nette\Application\Routers\Route;
-
-require_once $params['libsDir'] . "/Nella/loader.php";
-
-// Setup debugger
-Debugger::$logDirectory = $params['rootDir'] . '/log';
-Debugger::enable();
-
-// Load configurations
-$configurator = new Nella\Configurator($params);
-$context = $configurator->loadConfig();
+// Load Nette Framework
+require LIBS_DIR . '/Nette/loader.php';
+// Load Nella Framework
+require LIBS_DIR . '/Nella/loader.php';
 
 
-// Setup application
-$application = $context->application;
-//$application->errorPresenter = 'Error';
-$application->catchExceptions = Debugger::$productionMode;
+// Configure application
+$configurator = new Nella\Config\Configurator;
 
-// Router
-$router = $application->router;
-// Homepage
-$router[] = new Route("index.php", "Homepage:default", Route::ONE_WAY);
-// Media
-$route = $router[] = new Nella\Media\FileRoute(
-	'files/<file>', "Media:Media:file", 0, $context->doctrineContainer
-);
-$route = $router[] = new Nella\Media\ImageRoute(
-	'images/<format>/<image>.<type>', "Media:Media:image", 0, $context->doctrineContainer
-);
-// Default
-$router[] = new Route("<presenter>/<action>[/<id>]", "Homepage:default");
+// Enable Nette Debugger for error visualisation & logging
+//$configurator->setProductionMode($configurator::AUTO);
+$configurator->enableDebugger(__DIR__ . '/../log');
+
+// Enable RobotLoader - this will load all classes automatically
+$configurator->setTempDirectory(__DIR__ . '/../temp');
+$configurator->getSplClassLoader()
+	->addAlias('Symfony', LIBS_DIR . "/Symfony")
+	->addAlias('Doctrine', LIBS_DIR . "/Doctrine")
+
+// Create Dependency Injection container from config.neon file
+$configurator->addConfig(__DIR__ . '/config/config.neon');
+if (file_exists($file = __DIR__ . '/config/local.neon')) {
+	$configurator->addConfig(__DIR__ . '/config/local.neon');
+}
+$container = $configurator->createContainer();
+
+// Setup router
+$container->router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
+$container->router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 
 
-$application->run();
+// Configure and run the application!
+$container->application->run();

@@ -8,38 +8,57 @@
  * @param string   $robots   tell robots how to index the content of a page (optional)
  * @param array    $flashes  flash messages
  *}
-
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta http-equiv="Content-Language" content="en">
 
-	<meta name="description" content="Nellae Framework web application skeleton">
+	<meta name="description" content="Nella Framework web application skeleton">
 	<meta name="robots" content="{$robots}" n:ifset="$robots">
 
-	<title>{$siteName}</title>
+	<title>Nella Framework Skeleton</title>
 
-	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
+	<meta name="description" content="Nella Framework - official website">
+
+	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/style.css">
 	<link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="{$basePath}/css/jquery-ui-1.8.13.custom.css">
 
-	<script src="{$basePath}/js/head.min.js"></script>
-	<script>
-		head.js(
-			{$basePath}+'/js/jquery-1.6.1.min.js',
-			{$basePath}+'/js/jquery-ui-1.8.13.custom.min.js',
-			{$basePath}+'/js/jquery-ui-timepicker-addon.js',
-			{$basePath}+'/js/netteForms.js',
-			{$basePath}+'/js/nellaMfu.js',
-			{$basePath}+'/js/nella.js'
-		);
-	</script>
+	<script src="{$basePath}/js/modernizr-2.5.3.min.js"></script>
+
+	{block head}{/block}
 </head>
 
 <body>
 	<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
 
 	{include #content}
+
+	<script>
+		window._gaq = [['_setAccount','UA-1234567-9'],['_trackPageview'],['_trackPageLoadTime']];
+
+		Modernizr.load([{
+			load: '//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js',
+			complete: function () {
+				if ( !window.jQuery ) {
+					Modernizr.load('{$basePath}/js/jquery-1.7.1.min.js');
+				}
+			}
+		},{
+			load: '{$basePath}/js/netteForms.js'
+		},{
+			load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+		}]);
+	</script>
+
+	<!--[if lt IE 7 ]>
+	<script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+	<script defer>window.attachEvent('onload',function(){ CFInstall.check({ mode:'overlay' }) })</script>
+	<![endif]-->
 </body>
 </html>
