@@ -19,11 +19,14 @@ $configurator = new Nella\Config\Configurator;
 //$configurator->setProductionMode($configurator::AUTO);
 $configurator->enableDebugger(__DIR__ . '/../log');
 
-// Enable RobotLoader - this will load all classes automatically
-$configurator->setTempDirectory(__DIR__ . '/../temp');
+// Enable SplClassLoader - this will load all classes automatically
 $configurator->getSplClassLoader()
 	->addNamespaceAlias('Symfony', LIBS_DIR . "/Symfony")
 	->addNamespaceAlias('Doctrine', LIBS_DIR . "/Doctrine");
+
+// Enable RobotLoader - this will load all classes automatically
+$configurator->setTempDirectory(__DIR__ . '/../temp');
+$configurator->createRobotLoader()->addDirectory(APP_DIR)->register();
 
 // Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
