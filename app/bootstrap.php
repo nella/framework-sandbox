@@ -22,8 +22,8 @@ $configurator->enableDebugger(__DIR__ . '/../log');
 // Enable RobotLoader - this will load all classes automatically
 $configurator->setTempDirectory(__DIR__ . '/../temp');
 $configurator->getSplClassLoader()
-	->addAlias('Symfony', LIBS_DIR . "/Symfony")
-	->addAlias('Doctrine', LIBS_DIR . "/Doctrine");
+	->addNamespaceAlias('Symfony', LIBS_DIR . "/Symfony")
+	->addNamespaceAlias('Doctrine', LIBS_DIR . "/Doctrine");
 
 // Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
