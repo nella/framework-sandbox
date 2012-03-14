@@ -3,6 +3,7 @@ services:
 		class: Nette\Caching\Storages\MemoryStorage
 	templateCacheStorage:
 		class: Nette\Caching\Storages\MemoryStorage
+		autowired: no
 
 doctrine:
 	database:

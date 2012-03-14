@@ -6,3 +6,6 @@
 #
 php:
 	date.timezone: Europe/Prague
+
+parameters:
+	storageDir: %appDir%/storage
