@@ -27,9 +27,7 @@ $configurator->getSplClassLoader()
 
 // Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
-if (file_exists($file = __DIR__ . '/config/local.neon')) {
-	$configurator->addConfig(__DIR__ . '/config/local.neon');
-}
+$configurator->addConfigIfExist(__DIR__ . '/config/local.neon');
 $container = $configurator->createContainer();
 
 // Setup router
