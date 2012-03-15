@@ -1,11 +1,16 @@
+doctrine:
+	connections:
+		default:
+			driver: pdo_sqlite
+			path: %storageDir%/db.sqlite
+
+	entityManagers:
+		default:
+			connection: default
+
 services:
 	cacheStorage:
 		class: Nette\Caching\Storages\MemoryStorage
 	templateCacheStorage:
 		class: Nette\Caching\Storages\MemoryStorage
 		autowired: no
-
-doctrine:
-	database:
-		driver: pdo_sqlite
-		path: %storageDir%/db.sqlite
