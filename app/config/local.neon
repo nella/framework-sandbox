@@ -8,6 +8,13 @@ doctrine:
 		default:
 			connection: default
 
+media:
+	entityManager: @doctrine.entityManagers.default
+
+
+model:
+	entityManager: @doctrine.entityManagers.default
+
 services:
 	cacheStorage:
 		class: Nette\Caching\Storages\MemoryStorage
