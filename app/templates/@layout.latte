@@ -46,11 +46,11 @@
 			load: '//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js',
 			complete: function () {
 				if ( !window.jQuery ) {
-					Modernizr.load('{$basePath}/js/jquery-1.7.1.min.js');
+					Modernizr.load({$basePath}+'/js/jquery-1.7.1.min.js');
 				}
 			}
 		},{
-			load: '{$basePath}/js/netteForms.js'
+			load: {$basePath}+'/js/netteForms.js'
 		},{
 			load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
 		}]);
