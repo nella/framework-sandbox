@@ -1,12 +1,11 @@
 doctrine:
-	connections:
-		default:
-			driver: pdo_sqlite
-			path: %storageDir%/db.sqlite
-
 	entityManagers:
 		default:
-			connection: default
+			connection:
+				driver: pdo_sqlite
+				path: %storageDir%/db.sqlite
+
+			console: true
 
 media:
 	entityManager: @doctrine.entityManagers.default
