@@ -1,1 +1,0 @@
-Put Doctrine Extension here (https://github.com/beberlei/DoctrineExtensions/tree/master/lib/DoctrineExtensions)

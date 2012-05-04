@@ -20,8 +20,7 @@ $configurator->enableDebugger(__DIR__ . '/../log');
 // Enable SplClassLoader - this will load all classes automatically
 $configurator->getSplClassLoader()
 	->addNamespaceAlias('Symfony', LIBS_DIR . "/Symfony")
-	->addNamespaceAlias('Doctrine', LIBS_DIR . "/Doctrine")
-	->addNamespaceAlias('DoctrineExtensions', LIBS_DIR . "/DoctrineExtensions");
+	->addNamespaceAlias('Doctrine', LIBS_DIR . "/Doctrine");
 
 // Enable RobotLoader - this will load all classes automatically
 $configurator->setTempDirectory(__DIR__ . '/../temp');
