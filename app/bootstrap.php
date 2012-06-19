@@ -7,7 +7,7 @@ use Nette\Application\Routers\Route;
 
 
 // Load Nella Framework
-require LIBS_DIR . '/Nella/loader.php';
+require LIBS_DIR . '/autoload.php';
 
 
 // Configure application
@@ -16,11 +16,6 @@ $configurator = new Nella\Config\Configurator;
 // Enable Nette Debugger for error visualisation & logging
 //$configurator->setProductionMode($configurator::AUTO);
 $configurator->enableDebugger(__DIR__ . '/../log');
-
-// Enable SplClassLoader - this will load all classes automatically
-$configurator->getSplClassLoader()
-	->addNamespaceAlias('Symfony', LIBS_DIR . "/Symfony")
-	->addNamespaceAlias('Doctrine', LIBS_DIR . "/Doctrine");
 
 // Enable RobotLoader - this will load all classes automatically
 $configurator->setTempDirectory(__DIR__ . '/../temp');

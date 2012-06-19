@@ -11,26 +11,22 @@ Requirements
 
 Nella Framework requires PHP 5.3.2 with PDO.
 
-- Nette Framework 2.0.x
-- Doctrine ORM 2.2.x
-- Symfony Console 2.0.x
+- [Nette Framework 2.0.x](http://nette.org)
+- [Doctrine ORM 2.2.x](http://www.doctrine-project.org/projects/orm.html)
+- [Symfony Console 2.0.x](http://symfony.com/doc/current/components/console.html)
 
 
 Installation
 ------------
 
-After downloading the latest distribution package from http://nellafw.org/download, extract it to a directory accessible by web server. The installation is done!
+**Via composer**
 
-The source tree includes the following directories:
+- `composer create-project nella/framework-sandbox yourProjectName` where _yourProjectName_ is path to directory where your app is created.
 
-- Nella: this directory contains the source code of Nella Framework. This is the only directory that you will need in order to deploy with your application.
+**Via package**
 
-- API: generated API documentation for the framework in HTML format. These files are build using Apidoc from the contents of the Nella directory.
 
-- sandbox: contains a pre-packaged Nella Framework project, basic configure structure for your application.
-
-- tests: contains Nella Framework unit tests.
-
+- Download distribution package from http://nellafw.org/download extract it and replace your project directory with _sandbox_ directory from package.
 
 -----
 
