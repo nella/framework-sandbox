@@ -8,11 +8,11 @@ doctrine:
 			console: true
 
 media:
-	entityManager: @doctrine.entityManagers.default
+	entityManager: @doctrine.entityManager
 
 
 model:
-	entityManager: @doctrine.entityManagers.default
+	entityManager: @doctrine.entityManager
 
 services:
 	cacheStorage:
@@ -20,3 +20,5 @@ services:
 	templateCacheStorage:
 		class: Nette\Caching\Storages\MemoryStorage
 		autowired: no
+
+diagnostics:

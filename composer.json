@@ -20,6 +20,10 @@
 	},
 	"require": {
 		"php": ">= 5.3.2",
-		"nella/framework": "dev-master"
+		"nella/framework": "@dev",
+		"doctrine/common": "2.3.*@rc",
+		"doctrine/dbal": "2.3.*@rc",
+		"doctrine/orm": "2.3.*@rc",
+		"doctrine/migrations": "@dev"
 	}
 }
